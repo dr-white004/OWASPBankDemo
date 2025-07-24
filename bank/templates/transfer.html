@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Transfer Money{% endblock %}
+
+{% block content %}
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md mx-auto">
+        <h2 class="text-2xl font-bold mb-6 text-center">Transfer Money</h2>
+        <!-- No CSRF token, vulnerable to CSRF -->
+        <form method="POST" action="{% url 'transfer' %}">
+             
+            <div class="mb-4">
+                <label class="block text-gray-700">To Account Number</label>
+                <input type="text" name="to_account" class="w-full p-2 border rounded">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700">Amount (₦)</label>
+                <input type="number" step="0.01" name="amount" class="w-full p-2 border rounded">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700">Description</label>
+                <input type="text" name="description" class="w-full p-2 border rounded">
+            </div>
+            <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Transfer</button>
+        </form>
+        <a href="{% url 'dashboard' %}" class="mt-4 inline-block text-blue-500">Back to Dashboard</a>
+    </div>
+{% endblock %}

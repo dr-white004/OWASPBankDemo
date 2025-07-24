@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+    <h1 class="text-3xl font-bold mb-4">Welcome, {{ user.username }}</h1>
+    <!-- Vulnerable to XSS: message displayed without escaping -->
+    {% if message %}
+        <div class="bg-yellow-100 p-4 rounded">{{ message|safe}}</div>
+    {% endif %}
+    <div class="bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-xl font-semibold mb-4">Account Details</h2>
+        <p>Account Number: {{ account.account_number }}</p>
+        <p>Balance: ₦{{ account.balance }}</p>
+    </div>
+{% endblock %}

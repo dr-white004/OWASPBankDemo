@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Transaction History{% endblock %}
+
+{% block content %}
+    <h1 class="text-3xl font-bold mb-4">Transaction History</h1>
+    <div class="bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-xl font-semibold mb-4">Account: {{ account.account_number }}</h2>
+        <table class="w-full border-collapse">
+            <thead>
+                <tr class="bg-gray-200">
+                    <th class="p-2">From</th>
+                    <th class="p-2">To</th>
+                    <th class="p-2">Amount</th>
+                    <th class="p-2">Description</th>
+                    <th class="p-2">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for transaction in transactions %}
+                    <tr>
+                        <td class="p-2 border">{{ transaction.from_account.account_number }}</td>
+                        <td class="p-2 border">{{ transaction.to_account.account_number }}</td>
+                        <td class="p-2 border">₦{{ transaction.amount }}</td>
+                        <td class="p-2 border">{{ transaction.description }}</td>
+                        <td class="p-2 border">{{ transaction.timestamp }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'dashboard' %}" class="mt-4 inline-block text-blue-500">Back to Dashboard</a>
+    </div>
+{% endblock %}

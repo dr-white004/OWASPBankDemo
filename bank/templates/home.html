@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Welcome to Banking App{% endblock %}
+
+{% block content %}
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-2xl mx-auto">
+        <h1 class="text-3xl font-bold mb-6 text-center">Welcome to the Vulnerable Banking App</h1>
+        <p class="mb-4 text-gray-700">
+            This is a deliberately vulnerable Django banking application designed for educational purposes to demonstrate
+            <a href="https://owasp.org/www-project-top-ten/" class="text-blue-500 hover:underline" target="_blank">OWASP Top 10 vulnerabilities</a>.
+            It simulates a basic banking system where users can:
+        </p>
+        <ul class="list-disc list-inside mb-4 text-gray-700">
+            <li><a href="{% url 'register' %}" class="text-blue-500 hover:underline">Register</a> a new account with a starting balance of ₦100,000.00.</li>
+            <li><a href="{% url 'login' %}" class="text-blue-500 hover:underline">Login</a> to access your account.</li>
+            <li>View account details and balance on the <a href="{% url 'dashboard' %}" class="text-blue-500 hover:underline">Dashboard</a> (requires login).</li>
+            <li><a href="{% url 'transfer' %}" class="text-blue-500 hover:underline">Transfer</a> Naira (₦) to other accounts (requires login).</li>
+            <li>Check <a href="{% url 'transactions' %}" class="text-blue-500 hover:underline">Transaction History</a> (requires login).</li>
+            <li><a href="{% url 'logout' %}" class="text-blue-500 hover:underline">Logout</a> to end your session (requires login).</li>
+        </ul>
+        <p class="mb-4 text-gray-700">
+            <strong>Warning:</strong> This app contains intentional security flaws, including SQL Injection, Cross-Site Scripting (XSS),
+            Cross-Site Request Forgery (CSRF), and Broken Access Control, to teach how vulnerabilities work and how to fix them.
+            <strong>Do not use in production!</strong> Use in a controlled environment (e.g., local server or Docker) for learning purposes only.
+        </p>
+        <div class="text-center">
+            {% if user.is_authenticated %}
+                <a href="{% url 'dashboard' %}" class="inline-block bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Go to Dashboard</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="inline-block bg-blue-500 text-white p-2 rounded hover:bg-blue-600 mr-2">Login</a>
+                <a href="{% url 'register' %}" class="inline-block bg-green-500 text-white p-2 rounded hover:bg-green-600">Register</a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md mx-auto">
+        <h2 class="text-2xl font-bold mb-6 text-center">Login</h2>
+        <!-- No CSRF token, vulnerable to CSRF -->
+        <form method="POST" action="{% url 'login' %}">
+            <div class="mb-4">
+                <label class="block text-gray-700">Username</label>
+                <input type="text" name="username" class="w-full p-2 border rounded">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700">Password</label>
+                <input type="password" name="password" class="w-full p-2 border rounded">
+            </div>
+            <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Login</button>
+        </form>
+        <a href="{% url 'register' %}" class="mt-4 inline-block text-blue-500">Need an account? Register</a>
+    </div>
+{% endblock %}
